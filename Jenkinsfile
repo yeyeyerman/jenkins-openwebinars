@@ -9,8 +9,13 @@ pipeline {
     stage('Test') {
       steps {
         echo 'Test'
-        sh '/bin/nc -vz localhost 22'
+        docker run -p 80:80 -id --name app --rm app
         sh '/bin/nc -vz localhost 80'
+      }
+      post {
+        always {
+          sh 'docker container stop app'
+        }
       }
     }
     stage('Push Registry') {
