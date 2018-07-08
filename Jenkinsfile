@@ -21,8 +21,8 @@ pipeline {
     stage('Push Registry') {
       steps {
         echo 'Push to Docker registry'
-        sh 'docker tag ap:test app:stable'
-        sh 'docker push app:test app:stable'
+        sh 'docker tag app app:stable'
+        sh 'docker push app:stable'
       }
     }
   }
